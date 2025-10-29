@@ -1,4 +1,4 @@
-A Python-based toolkit for automating image preprocessing, annotation management, and dataset generation workflows used in object detection projects.
+A Python-based toolkit for automating image preprocessing, annotation management, dataset generation and model training workflows used in object detection projects.
 
 This repository helps streamline preparing high-quality datasets — including resizing, augmenting, labeling, and organizing images — for models such as YOLO, Detectron2, and TensorFlow Object Detection API.
 
