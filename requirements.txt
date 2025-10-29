@@ -1,0 +1,12 @@
+pyyaml
+autodistill-grounding-dino
+autodistill
+opencv-python-headless
+albumentations
+pillow
+rembg
+numpy
+requests
+duckduckgo-search
+
+

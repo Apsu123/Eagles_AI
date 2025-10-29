@@ -1,6 +1,7 @@
 import cv2
 import os
 from PIL import Image
+from pathlib import Path
 
 def resize_image(image_path, width=640, height=640):
     # Load the image with OpenCV
@@ -77,8 +78,11 @@ def resize_and_rename_images(root_folder, serials_path, width=640, height=640):
 
 
 if __name__ == "__main__":
-    root_folder = "/home/apsu/Predict/RealWordTest"
+    bg_dir = Path("/home/apsu/Predict/Test2")
+    for file_path in bg_dir.iterdir():
+        if file_path.is_file():
+            resize_image(str(file_path))
 
-    for filename in os.listdir(root_folder):
-        path = os.path.join(root_folder, filename)
-        resize_image(path)
+
+
+

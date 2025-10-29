@@ -7,11 +7,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 def download_image(image_url, download_dir, idx):
     try:
         response = requests.get(image_url, timeout=10)
-        if response.status_code == 429:
-            print(f"Rate limit hit for {image_url}, waiting 5 seconds...")
-            import time
-            time.sleep(5)
-            response = requests.get(image_url, timeout=10)
         if response.status_code == 200:
             ext = os.path.splitext(image_url)[1] or ".jpg"
             filename = f"image_{idx}{ext}"
@@ -25,28 +20,33 @@ def download_image(image_url, download_dir, idx):
         print(f"Error downloading {image_url}: {e}")
 
 
-def get_images(search, num_results, download_dir, max_workers=8):
+def get_images(search, num_results, download_dir, id, max_workers=8):
     ddgs = DDGS()
     results = ddgs.images(
         keywords=search,
         region="wt-wt",
         safesearch="off",
         max_results=num_results,
+        size="Wallpaper"
     )
 
     download_tasks = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         for idx, result in enumerate(results):
+            name = f"{id}_{idx}"
             image_url = result.get("image")
             if image_url:
-                future = executor.submit(download_image, image_url, download_dir, idx)
+                future = executor.submit(download_image, image_url, download_dir, name)
                 download_tasks.append(future)
         for future in as_completed(download_tasks):
             pass  # Output handled in download_image
 
 
-get_images(
-    "exotic nature wallpapers 4k pc",
-    500,
-    "/home/apsu/exotic nature",
-)
+if __name__ == "__main__":
+
+    get_images(
+        "empty grey backgrounds -shutterstock -watermark",
+        15,
+        "/home/apsu/FieldTest/Backgrounds4 (Copy)",
+        "grey"
+    )
