@@ -269,12 +269,12 @@ if __name__ == "__main__":
         # Ensure output directory exists
         processor.base_output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Execute pipeline steps
-        #processor.download_part_images()
-        #processor.download_background_images()
-        #processor.resize_images()
-        #processor.convert_backgrounds_to_png()
-        #processor.remove_backgrounds_from_parts()
+        #Execute pipeline steps
+        processor.download_part_images()
+        processor.download_background_images()
+        processor.resize_images()
+        processor.convert_backgrounds_to_png()
+        processor.remove_backgrounds_from_parts()
         processor.annotate_dataset()
         processor.make_images_transparent()
         processor.augment_dataset()
